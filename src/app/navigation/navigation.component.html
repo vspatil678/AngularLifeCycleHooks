@@ -1,0 +1,41 @@
+<mat-toolbar class="nav-bar">
+  <mat-toolbar-row>
+    <span style="cursor: pointer" (click)="drawer.toggle()"><i class="material-icons">
+        dehaze
+        </i></span>
+    <span class="example-spacer"></span>
+    <mat-icon
+      class="example-icon"
+      aria-hidden="false"
+      aria-label="Example heart icon"
+      >favorite</mat-icon
+    >
+    <mat-icon
+      class="example-icon"
+      aria-hidden="false"
+      aria-label="Example delete icon"
+      >delete</mat-icon
+    >
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container class="example-container">
+        <mat-drawer #drawer mode=side>
+                <mat-action-list>
+                        <button mat-list-item (click)="onLifeCycleHook()"> Life Cycle Hook </button>
+                        <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title>
+                                        Component Communication
+                                  </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <button mat-list-item (click)="onInput()"> @Input </button>
+                                <button mat-list-item (click)="onOutput()"> @Output </button>
+                                <button mat-list-item (click)="onViewChield()"> @ViewChield </button>
+                                <button mat-list-item (click)="onServices()"> Services </button>
+                        </mat-expansion-panel>
+                </mat-action-list>
+        </mat-drawer>
+        <mat-drawer-content>
+            <router-outlet></router-outlet>
+        </mat-drawer-content>
+      </mat-drawer-container>
