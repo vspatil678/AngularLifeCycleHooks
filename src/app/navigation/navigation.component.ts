@@ -18,18 +18,18 @@ export class NavigationComponent implements OnInit {
   }
 
   onInput() {
-    this.router.navigate(['Types/ThroughInput']);
+    this.router.navigate(['Communication/Types/ThroughInput']);
   }
 
   onOutput() {
-    this.router.navigate(['Types/ThroughOutput']);
+    this.router.navigate(['Communication/Types/ThroughOutput']);
   }
 
   onViewChield() {
-    this.router.navigate(['ThroughViewChield']);
+    this.router.navigate(['Communication/Types']);
   }
 
   onServices() {
-    this.router.navigate(['ThroughServices']);
+    this.router.navigate(['Communication/Types/ThroughServices']);
   }
 }

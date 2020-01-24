@@ -8,7 +8,7 @@ import { CommunicationComponent } from './communication/communication.component'
 
 const routes: Routes = [
   {
-    path: 'Types', component: CommunicationComponent,  children: [
+    path: 'Types', component: CommunicationComponent, children: [
       {
         path: 'ThroughInput', component: ChildComponent
       },
@@ -27,3 +27,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class ComponentCommunicationRoutingModule { }
+
+
+
