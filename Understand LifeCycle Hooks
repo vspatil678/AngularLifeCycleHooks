@@ -106,8 +106,61 @@ AfterContent()
  
   
   
+  Important:
+  The best place to initialise your ‘components’ is in the ngOnInit lifecycle hook and not the constructor because
+  at this point only the input property bindings are being processed.
+  As we see here `ngOnChanges` called before ngOnInit.
+  Although the reason to use ngOnInit and not ngOnChanges to initialise a component is that ngOnInit is only called once
+  whereas ngOnChanges is called every time the input properties change.
   
+  The hooks of the Component are executed in the following order:
+  ↓ constructor
+↓ ngOnChanges
+↓ ngOnInit
+↓ ngDoCheck
+↓ ngAfterContentInit
+↓ ngAfterContentChecked
+↓ ngAfterViewInit
+↓ ngAfterViewChecked
+↓ ngOnDestroy
+
+Let’s dive into each phase..
+    ↓ constructor
+      This is invoked when Angular creates a component or directive by calling new keyword on the class.
+      example: new Comments("do..do..", "do..do..do..do..");
+    ↓ ngOnChanges
+      Invoked every time there is a change in one of the input properties/variables of the component.
+    ↓ ngOnInit
+      Invoked when component has been initialized (This hook is only called once after the first ngOnChanges)
+    ↓ ngDoCheck
+      Invoked when the change detector of the given component is invoked. 
+      It allows us to implement our own change detection algorithm for the component.
+      
+Important to know: 
+    `ngDoCheck` and `ngOnChanges` should not be implemented together on the same component because when we implement our own 
+    change detection algorithm in `ngDoCheck` we don’t need of `ngOnChanges`.      
+    
+    ↓ ngAfterContentInit
+      Invoked after Angular performs any ‘content projection’ into the components view.
+    
+ ‘Content projection’ :
+      If we add the tag `<ng-content> </ng-content> ` anywhere in our HTML template of component. 
+      The inner content of the component associated with the selector tag will be projected into this space.  
+      
+    ↓ ngAfterContentChecked
+      Invoked each time the content of the given component has been checked by the change detection mechanism of Angular.
+      
+    ↓ ngAfterViewInit
+      Invoked when the component’s view has been fully initialized.
+
+    ↓ ngAfterViewChecked
+      Invoked each time the view of the given component has been checked by the change detection mechanism of Angular.
+    
+    ↓ ngOnDestroy
+      This method will be invoked just before Angular destroys the component. Use this hook to unsubscribe observables and detach event handlers to avoid memory leaks.
   
+  References:
+  https://medium.com/javascript-in-plain-english/angular-project-with-lifecycle-hooks-understand-ngoninit-in-depth-b9919ad09e6
   
   
   
