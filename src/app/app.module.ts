@@ -16,6 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { ComponentCommunicationModule } from './component-communication/component-communication.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
   ],
   imports: [
     BrowserModule,
+    ComponentCommunicationModule,
+    // app routing should be last
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,

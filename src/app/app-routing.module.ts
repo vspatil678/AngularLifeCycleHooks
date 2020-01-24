@@ -10,11 +10,17 @@ const routes: Routes = [
       {
         path: 'LifeCycleHook', component: CommentsListComponent
       },
-     ]
+     ],
   },
   {
+      path: 'Communication',
+       loadChildren: () => import('./component-communication/component-communication.module').then(mod => mod.ComponentCommunicationModule)
+  },
+  { path: 'customer-list', loadChildren: () => import('./customers/customers.module').then(m => m.CustomersModule) },
+  { path: 'order-list', loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule) },
+  {
     path: '**', redirectTo: ''
-  }
+  },
 ];
 
 @NgModule({

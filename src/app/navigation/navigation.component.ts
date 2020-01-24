@@ -18,11 +18,11 @@ export class NavigationComponent implements OnInit {
   }
 
   onInput() {
-    this.router.navigate(['ThroughInput']);
+    this.router.navigate(['Types/ThroughInput']);
   }
 
   onOutput() {
-    this.router.navigate(['ThroughOutput']);
+    this.router.navigate(['Types/ThroughOutput']);
   }
 
   onViewChield() {
