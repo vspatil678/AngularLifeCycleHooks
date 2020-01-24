@@ -1,0 +1,170 @@
+After creating a component/directive by calling its constructor, 
+Angular calls the lifecycle hook methods in the following sequence at specific moments:
+
+1-- ngOnChanges()
+    Respond when Angular (re)sets data-bound input properties.
+    The method receives a SimpleChanges object of current and previous property values.
+    Called before ngOnInit() and whenever one or more data-bound input properties change.
+    
+2--  ngOnInit()
+    Called once, after the first ngOnChanges().
+    Initialize the directive/component after Angular first displays the data-bound properties
+    and sets the directive/component's input properties.
+    
+3-- ngDoCheck()
+    Detect and act upon changes that Angular can't or won't detect on its own.
+    Called during every change detection run, immediately after ngOnChanges() and ngOnInit().
+    
+4-- ngAfterContentInit()
+    Respond after Angular projects external content into the component's view / the view that a directive is in.
+    Called once after the first ngDoCheck().
+    
+5-- ngAfterContentChecked()
+    Respond after Angular checks the content projected into the directive/component.
+    Called after the ngAfterContentInit() and every subsequent ngDoCheck().
+    
+6-- ngAfterViewInit()
+    Respond after Angular initializes the component's views and child views / the view that a directive is in.
+    Called once after the first ngAfterContentChecked().
+    
+7-- ngAfterViewChecked()
+    Respond after Angular checks the component's views and child views / the view that a directive is in.
+    Called after the ngAfterViewInit() and every subsequent ngAfterContentChecked().
+    
+8-- ngOnDestroy()
+    Cleanup just before Angular destroys the directive/component. 
+    Unsubscribe Observables and detach event handlers to avoid memory leaks.
+    Called just before Angular destroys the directive/component.
+    
+
+USAGE
+--------------
+constructor
+Don't fetch data in a component constructor. 
+Constructors should do no more than set the initial local variables to simple values.
+An ngOnInit() is a good place for a component to fetch its initial data.
+
+Use ngOnInit() for two main reasons:
+  1-To perform complex initializations shortly after construction.
+  2- To set up the component after Angular sets the input properties.
+  Remember also that a directive's data-bound input properties are not set until after construction.
+  That's a problem if you need to initialize the directive based on those properties. They'll have been set when ngOnInit() runs.
+  The ngOnChanges() method is your first opportunity to access those properties.
+  Angular calls ngOnChanges() before ngOnInit() and many times after that. It only calls ngOnInit() once.
+  
+  
+ OnDestroy()
+  Put cleanup logic in ngOnDestroy(), the logic that must run before Angular destroys the directive.
+  This is the place to free resources that won't be garbage collected automatically.
+  Unsubscribe from Observables and DOM events.
+  Stop interval timers. Unregister all callbacks that this directive registered with global or application services.
+  You risk memory leaks if you neglect to do so.
+ 
+ OnChanges()
+   Angular calls its ngOnChanges() method whenever it detects changes to input properties of the component (or directive).
+   
+   ngOnChanges(changes: SimpleChanges) {
+  for (let propName in changes) {
+    let chng = changes[propName];
+    let cur  = JSON.stringify(chng.currentValue);
+    let prev = JSON.stringify(chng.previousValue);
+    this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+  }
+}
+
+The ngOnChanges() method takes an object that maps each changed property name to a SimpleChange object
+holding the current and previous property values. This hook iterates over the changed properties and logs them.
+
+Angular only calls the hook when the value of the input property changes.
+
+SimpleChange
+SimpleChange is a class
+
+class SimpleChange {
+  constructor(previousValue: any, currentValue: any, firstChange: boolean)
+  previousValue: any
+  currentValue: any
+  firstChange: boolean
+  isFirstChange(): boolean
+}
+
+DoCheck()
+  Use the DoCheck hook to detect and act upon changes that Angular doesn't catch on its own.
+  Use this method to detect a change that Angular overlooked.
+  This hook is called with enormous frequency—after every change detection cycle no matter where the change occurred.
+
+
+AfterView()
+  The AfterView sample explores the AfterViewInit() and AfterViewChecked() hooks
+  that Angular calls after it creates a component's child views.
+  
+AfterContent() 
+  The AfterContent sample explores the AfterContentInit() and AfterContentChecked() hooks that
+  Angular calls after Angular projects external content into the component.
+  Content projection is a way to import HTML content from outside the component and insert that content into the 
+  component's template in a designated spot.
+ 
+  
+  
+  Important:
+  The best place to initialise your ‘components’ is in the ngOnInit lifecycle hook and not the constructor because
+  at this point only the input property bindings are being processed.
+  As we see here `ngOnChanges` called before ngOnInit.
+  Although the reason to use ngOnInit and not ngOnChanges to initialise a component is that ngOnInit is only called once
+  whereas ngOnChanges is called every time the input properties change.
+  
+  The hooks of the Component are executed in the following order:
+  ↓ constructor
+↓ ngOnChanges
+↓ ngOnInit
+↓ ngDoCheck
+↓ ngAfterContentInit
+↓ ngAfterContentChecked
+↓ ngAfterViewInit
+↓ ngAfterViewChecked
+↓ ngOnDestroy
+
+Let’s dive into each phase..
+    ↓ constructor
+      This is invoked when Angular creates a component or directive by calling new keyword on the class.
+      example: new Comments("do..do..", "do..do..do..do..");
+    ↓ ngOnChanges
+      Invoked every time there is a change in one of the input properties/variables of the component.
+    ↓ ngOnInit
+      Invoked when component has been initialized (This hook is only called once after the first ngOnChanges)
+    ↓ ngDoCheck
+      Invoked when the change detector of the given component is invoked. 
+      It allows us to implement our own change detection algorithm for the component.
+      
+Important to know: 
+    `ngDoCheck` and `ngOnChanges` should not be implemented together on the same component because when we implement our own 
+    change detection algorithm in `ngDoCheck` we don’t need of `ngOnChanges`.      
+    
+    ↓ ngAfterContentInit
+      Invoked after Angular performs any ‘content projection’ into the components view.
+    
+ ‘Content projection’ :
+      If we add the tag `<ng-content> </ng-content> ` anywhere in our HTML template of component. 
+      The inner content of the component associated with the selector tag will be projected into this space.  
+      
+    ↓ ngAfterContentChecked
+      Invoked each time the content of the given component has been checked by the change detection mechanism of Angular.
+      
+    ↓ ngAfterViewInit
+      Invoked when the component’s view has been fully initialized.
+
+    ↓ ngAfterViewChecked
+      Invoked each time the view of the given component has been checked by the change detection mechanism of Angular.
+    
+    ↓ ngOnDestroy
+      This method will be invoked just before Angular destroys the component. Use this hook to unsubscribe observables and detach event handlers to avoid memory leaks.
+  
+  References:
+  https://medium.com/javascript-in-plain-english/angular-project-with-lifecycle-hooks-understand-ngoninit-in-depth-b9919ad09e6
+  
+  
+  
+  
+  
+  
+  
