@@ -1,1 +1,15 @@
-<p>parent works!</p>
+<div class="container">
+    <b>parent component</b>
+    <div class="row">
+        <div class="col">
+                <ul *ngFor="let name of this.names">
+                        <li (click)="onSelectName(name)" style="cursor: pointer">{{ name }}</li>
+                      </ul>
+                      <app-child [name]="this.selectedName"></app-child>                      
+        </div>
+        <div class="col">
+            <h4>click on name to select</h4>
+            <p>list of names in the parent component and selected name will display in child component</p>
+        </div>
+    </div>
+</div>

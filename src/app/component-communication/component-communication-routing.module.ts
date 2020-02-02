@@ -4,13 +4,14 @@ import { ChildComponent } from './using-input/child/child.component';
 import { ComponentOneComponent } from './using-services/component-one/component-one.component';
 import { ParentOutputComponent } from './using-output/parent/parent.component';
 import { CommunicationComponent } from './communication/communication.component';
+import { ParentComponent } from './using-input/parent/parent.component';
 
 
 const routes: Routes = [
   {
     path: 'Types', component: CommunicationComponent, children: [
       {
-        path: 'ThroughInput', component: ChildComponent
+        path: 'ThroughInput', component: ParentComponent
       },
       {
         path: 'ThroughOutput', component: ParentOutputComponent

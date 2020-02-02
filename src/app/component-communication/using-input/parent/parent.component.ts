@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParentComponent implements OnInit {
 
+  public names: string[];
+  public selectedName: string;
   constructor() { }
 
   ngOnInit() {
+    this.names = ['Niketh', 'Siddu', 'Santosh', 'Arun', 'Barat'];
+  }
+
+  public onSelectName(name: string) {
+    this.selectedName = name;
   }
 
 }

@@ -9,6 +9,7 @@ import { ComponentTwoComponent } from './using-services/component-two/component-
 import { ParentOutputComponent } from './using-output/parent/parent.component';
 import { ChildOutComponent } from './using-output/child/child.component';
 import { CommunicationComponent } from './communication/communication.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,8 @@ import { CommunicationComponent } from './communication/communication.component'
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     ComponentCommunicationRoutingModule
   ]
 })
