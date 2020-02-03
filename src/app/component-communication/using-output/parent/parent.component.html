@@ -1,1 +1,9 @@
-<p>parent works!</p>
+<div class="container">
+  <b>parent component</b>
+  <p>Total votes for bjp: {{ bjpCount }}</p>
+  <p>Total votes for congress: {{ congressCount }}</p>
+  <p>Total votes for jds: {{ jdsCount }}</p>
+  <div style="padding-top: 2%"> 
+        <app-child-out (votedFor)="onVoteReceive($event)"></app-child-out>
+  </div>
+</div>

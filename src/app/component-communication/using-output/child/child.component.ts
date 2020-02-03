@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-child-out',
@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChildOutComponent implements OnInit {
 
+  @Output() votedFor = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public onBjp() {
+      this.votedFor.emit('bjp');
+  }
+
+  public onCongrss() {
+  this.votedFor.emit('congress');
+  }
+
+  public onJds() {
+    this.votedFor.emit('jds');
   }
 
 }

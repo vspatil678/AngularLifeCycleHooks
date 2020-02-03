@@ -10,7 +10,7 @@ import { ParentOutputComponent } from './using-output/parent/parent.component';
 import { ChildOutComponent } from './using-output/child/child.component';
 import { CommunicationComponent } from './communication/communication.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
     ComponentCommunicationRoutingModule
   ]
 })
