@@ -11,13 +11,13 @@ const routes: Routes = [
   {
     path: 'Types', component: CommunicationComponent, children: [
       {
-        path: 'ThroughInput', component: ParentComponent
+        path: 'ThroughInput', component: ParentComponent, data: { title: 'Through Input' }
       },
       {
-        path: 'ThroughOutput', component: ParentOutputComponent
+        path: 'ThroughOutput', component: ParentOutputComponent, data: { title: 'Through Output' }
       },
       {
-        path: 'ThroughServices', component: ComponentOneComponent
+        path: 'ThroughServices', component: ComponentOneComponent, data: { title: 'Through Services' }
       }
     ]
   },

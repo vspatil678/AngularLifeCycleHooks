@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComminicationService } from '../comminication.service';
 
 @Component({
   selector: 'app-component-two',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComponentTwoComponent implements OnInit {
 
-  constructor() { }
+  public receivedData: any;
+  constructor(private communicationService: ComminicationService) {
+    this.communicationService.chat.subscribe((data: any) => {
+      this.receivedData = data;
+    });
+  }
 
   ngOnInit() {
   }

@@ -1,1 +1,16 @@
-<p>component-one works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>component one</p>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" #inputRef />
+                <div class="input-group-append">
+                    <button class="btn btn-success" (click)="onSendName(inputRef.value)">send</button>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <app-component-two></app-component-two>
+        </div>
+    </div>
+</div>

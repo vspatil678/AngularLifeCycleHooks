@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComminicationService } from '../comminication.service';
 
 @Component({
   selector: 'app-component-one',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComponentOneComponent implements OnInit {
 
-  constructor() { }
+  constructor(private communicationService: ComminicationService) { }
 
   ngOnInit() {
+  }
+
+  public onSendName(data: string) {
+    this.communicationService.chat.next(data + ' from component one');
   }
 
 }
