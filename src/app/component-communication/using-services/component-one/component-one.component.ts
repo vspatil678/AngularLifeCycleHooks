@@ -8,7 +8,11 @@ import { ComminicationService } from '../comminication.service';
 })
 export class ComponentOneComponent implements OnInit {
 
-  constructor(private communicationService: ComminicationService) { }
+  // public wecanSubscribeAnywhere: any;
+  constructor(private communicationService: ComminicationService) {
+    // this.communicationService.chat.subscribe((data) => { this.wecanSubscribeAnywhere = data; });
+  }
+
 
   ngOnInit() {
   }
